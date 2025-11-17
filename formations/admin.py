@@ -10,3 +10,10 @@ class FormationAdmin(admin.ModelAdmin):
     list_display = ['titre', 'categorie', 'duree', 'prix', 'date_creation']  # Vue liste
     list_filter = ['categorie', 'date_creation']  # Filtres
     search_fields = ['titre', 'description']  # Recherche
+from .models import Formation, Categorie, Inscription  # Importe Inscription
+
+@admin.register(Inscription)
+class InscriptionAdmin(admin.ModelAdmin):
+    list_display = ['user', 'formation', 'statut', 'date_inscription']
+    list_filter = ['statut', 'formation']
+    search_fields = ['user__username', 'formation__titre']    
