@@ -56,7 +56,7 @@ ROOT_URLCONF = 'sms_center.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], #Ajoute ça pour trouver mes templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
