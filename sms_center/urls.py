@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import path, include  # Ajoute 'include'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', include('formations.urls')),  # Au lieu de admin seulement
     path('formations/', include('formations.urls')),  # Route pour app formations
 ]

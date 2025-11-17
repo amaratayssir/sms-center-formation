@@ -1,34 +1,40 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Catalogue des Formations SMS</title>
-</head>
-<body>
-    <h1>Nos Formations</h1>
-    <p>Bienvenue au Centre SMS ! Voici nos offres.</p>
+{% extends 'base.html' %}
+
+{% block title %}Catalogue des Formations{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Nos Formations</h1>
+    <p class="text-center lead">Découvrez nos offres au Centre de Formation SMS.</p>
+    
     {% if formations %}
-        <table border="1">
-            <tr>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Durée (h)</th>
-                <th>Prix (€)</th>
-                <th>Catégorie</th>
-            </tr>
+        <div class="row">
             {% for formation in formations %}
-                <tr>
-                    <td>{{ formation.titre }}</td>
-                    <td>{{ formation.description|truncatewords:10 }}</td>  <!-- Limite texte -->
-                    <td>{{ formation.duree }}</td>
-                    <td>{{ formation.prix }}</td>
-                    <td>{{ formation.categorie.nom }}</td>
-                </tr>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ formation.titre }}</h5>
+                            <p class="card-text">{{ formation.description|truncatewords:15 }}</p>
+                            <ul class="list-unstyled">
+                                <li><strong>Durée :</strong> {{ formation.duree }} heures</li>
+                                <li><strong>Prix :</strong> {{ formation.prix }} €</li>
+                                <li><strong>Catégorie :</strong> {{ formation.categorie.nom }}</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">S'inscrire</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Créée le {{ formation.date_creation|date:"d/m/Y" }}
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-        </table>
+        </div>
     {% else %}
-        <p>Aucune formation pour l'instant. Ajoutez-en en admin !</p>
+        <div class="alert alert-info text-center">
+            Aucune formation disponible. <a href="/admin/formations/formation/add/">Ajoutez-en en admin !</a>
+        </div>
     {% endif %}
-    <a href="/admin/">Retour Admin</a>
-</body>
-</html>
+    
+    <div class="text-center mt-4">
+        <a href="/admin/" class="btn btn-secondary">Retour Admin</a>
+    </div>
+{% endblock %}
